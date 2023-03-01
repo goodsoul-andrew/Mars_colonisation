@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect
 from data import db_session
 from data.users import User
+from data.jobs import Job
 from flask_login import LoginManager, login_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField
@@ -16,7 +17,9 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 @app.route('/')
 @app.route('/index')
 def index():
-    return "Привет, Яндекс!"
+    db_sess = db_session.create_session()
+    jobs = db_sess.query(Job).filter()
+    return render_template("jobs.html", jobs=jobs)
 
 
 @app.route('/register', methods=['GET', 'POST'])

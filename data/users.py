@@ -2,6 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import sqlalchemy
 from flask_login import UserMixin
 from .db_session import SqlAlchemyBase
+from sqlalchemy import orm
 
 
 class User(SqlAlchemyBase, UserMixin):
@@ -17,6 +18,7 @@ class User(SqlAlchemyBase, UserMixin):
     modified_date = sqlalchemy.Column(sqlalchemy.DateTime)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     about = sqlalchemy.Column(sqlalchemy.String)
+    #jobs = orm.relationship("Job", back_populates='team_leader')
     # user = orm.relationship('User')
 
     def set_password(self, password):

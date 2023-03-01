@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+        table, th, td {
+          border: 1px solid black;
+          width: 100%;
+          padding-right: 10px;
+          padding-left: 10px;
+        }
+</style>
+    <h1><center>Список работ</center></h1>
+    {% for job in jobs%}
+        <h3>Действие №{{job.id}}</h3>
+        <table>
+            <tr>
+                <th>Название</th>
+                <th> лидер команды </th>
+                <th> продолжительность </th>
+                <th> исполнители </th>
+                <th> состояние </th>
+            </tr>
+            <tr>
+                <td>{{job.job}}</td>
+                <td>{{job.team_leader.name}} {{job.team_leader.surname}}</td>
+                <td>{{job.work_size}} часов</td>
+                <td>{{job.collaborators}}</td>
+                {% set f = job.is_finished %}
+                {% if f == True %}
+                    <td>завершено</td>
+                {% else %}
+                    <td>в процессе</td>
+                {% endif %}
+            </tr>
+        </table>
+    {% endfor %}
+{% endblock %}
