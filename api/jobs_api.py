@@ -12,7 +12,7 @@ blueprint = flask.Blueprint(
 )
 
 
-@blueprint.route('/api/jobs')
+@blueprint.route('/api/old/jobs')
 def get_jobs():
     db_sess = db_session.create_session()
     jobs = db_sess.query(Job).all()
@@ -23,7 +23,7 @@ def get_jobs():
         }
     )
 
-@blueprint.route("/api/jobs/<int:job_id>")
+@blueprint.route("/api/old/jobs/<int:job_id>")
 def get_job(job_id: int):
     db_sess = db_session.create_session()
     jobs = db_sess.query(Job).get(job_id)
@@ -36,7 +36,7 @@ def get_job(job_id: int):
     )
 
 
-@blueprint.route("/api/jobs", methods=["POST"])
+@blueprint.route("/api/old/jobs", methods=["POST"])
 def add_job():
     if not request.json:
         return jsonify({'error': 'Empty request'})

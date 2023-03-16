@@ -17,7 +17,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     address = sqlalchemy.Column(sqlalchemy.String)
     email = sqlalchemy.Column(sqlalchemy.String, unique=True)
     modified_date = sqlalchemy.Column(sqlalchemy.DateTime)
-    hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     about = sqlalchemy.Column(sqlalchemy.String)
     #jobs = orm.relationship("Job", back_populates='team_leader')
     # user = orm.relationship('User')

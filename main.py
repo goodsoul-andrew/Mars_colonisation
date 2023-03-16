@@ -8,11 +8,14 @@ from flask import make_response, jsonify
 from forms.user import RegisterForm, LoginForm
 from flask_restful import Api
 from api.users_resource import UserResource, AllUsersResource
+from  api.jobs_resource import JobResource, AllJobsResource
 
 app = Flask(__name__, template_folder="templates")
 api = Api(app)
-api.add_resource(AllUsersResource, '/api/v2/users')
-api.add_resource(UserResource, '/api/v2/users/<int:user_id>')
+api.add_resource(AllUsersResource, '/api/users')
+api.add_resource(UserResource, '/api/users/<int:user_id>')
+api.add_resource(JobResource, '/api/jobs/<int:job_id>')
+api.add_resource(AllJobsResource, '/api/jobs')
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
