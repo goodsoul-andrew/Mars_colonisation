@@ -6,6 +6,7 @@ from data.jobs import Job
 from flask_login import LoginManager, login_user
 from flask import make_response, jsonify
 from forms.user import RegisterForm, LoginForm
+from forms.job import AddingForm
 from flask_restful import Api
 from api.users_resource import UserResource, AllUsersResource
 from  api.jobs_resource import JobResource, AllJobsResource
@@ -52,6 +53,29 @@ def reqister():
         db_sess.commit()
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
+
+
+'''@app.route('/add_job', methods=['GET', 'POST'])
+def add_job():
+    form = AddingForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        all_jobs = db_sess.query(Job).all()
+        last_id = max(u.id for u in all_jobs)
+        job = Job(
+            id=last_id + 1,
+            team_leader_id=form.team_leader_id.data,
+            job=form.job.data,
+            work_size=form.work_size.data,
+            collaborators=form.collaborators.data,
+            start_date=form.start_date.data,
+            end_date=form.end_date.data,
+            is_finished=form.is_finished.data
+        )
+        db_sess.add(job)
+        db_sess.commit()
+        return redirect('/index')
+    return render_template('add_job.html', title='Добавить задание', form=form)'''
 
 
 @app.route('/login', methods=['GET', 'POST'])
